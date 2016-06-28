@@ -159,5 +159,16 @@ namespace Marten.Util
 
             return cmd;
         }
+
+        public static NpgsqlConnection LongLivedConnection(this IConnectionFactory factory)
+        {
+            var conn = factory.Create();
+            if (!conn.ConnectionString.Contains("Keepalive", StringComparison.OrdinalIgnoreCase))
+            {
+                conn.ConnectionString = conn.ConnectionString.TrimEnd(';') + ";Keepalive=10";
+            }
+
+            return conn;
+        }
     }
 }
