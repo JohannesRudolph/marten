@@ -76,6 +76,7 @@
     <Compile Include="Bugs\Bug_431_not_patching_with_the_doc_type_column.cs" />
     <Compile Include="Bugs\Bug_432_querying_with_UTC_times_with_offset.cs" />
     <Compile Include="bulk_loader_overwrite_sql_tests.cs" />
+    <Compile Include="Events\aggregates_should_be_registered_as_document_mappings_automatically.cs" />
     <Compile Include="Events\capturing_event_versions_on_existing_streams_after_append.cs" />
     <Compile Include="Events\EventStreamTester.cs" />
     <Compile Include="Events\fetch_a_single_event_with_metadata.cs" />
