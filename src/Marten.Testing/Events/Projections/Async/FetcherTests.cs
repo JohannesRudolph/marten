@@ -39,7 +39,7 @@ namespace Marten.Testing.Events.Projections.Async
                 await session.SaveChangesAsync().ConfigureAwait(false);
             }
 
-            using (var data = new Fetcher(theOptions, new ConnectionSource(), theStore.Schema.Events.As<EventGraph>(), new JilSerializer()))
+            using (var data = new Fetcher(theOptions, new ConnectionSource(), theStore.Schema.Events, new JilSerializer()))
             {
                 var page = await data.FetchNextPage(0).ConfigureAwait(false);
 
@@ -74,7 +74,7 @@ namespace Marten.Testing.Events.Projections.Async
                 await session.SaveChangesAsync().ConfigureAwait(false);
             }
 
-            var events = theStore.Schema.Events.As<EventGraph>();
+            var events = theStore.Schema.Events;
             theOptions.EventTypeNames = new[]
             {
                 events.EventMappingFor<MembersDeparted>().EventTypeName,
@@ -127,7 +127,7 @@ namespace Marten.Testing.Events.Projections.Async
 
 
 
-            var events = theStore.Schema.Events.As<EventGraph>();
+            var events = theStore.Schema.Events;
             theOptions.EventTypeNames = new[]
             {
                 events.EventMappingFor<MembersJoined>().EventTypeName,
@@ -167,7 +167,7 @@ namespace Marten.Testing.Events.Projections.Async
                 await session.SaveChangesAsync().ConfigureAwait(false);
             }
 
-            using (var data = new Fetcher(theOptions, new ConnectionSource(), theStore.Schema.Events.As<EventGraph>(), new JilSerializer()))
+            using (var data = new Fetcher(theOptions, new ConnectionSource(), theStore.Schema.Events, new JilSerializer()))
             {
                 var events1 = (await data.FetchNextPage(0).ConfigureAwait(false)).Streams.SelectMany(x => x.Events).ToArray();
                 var events2 = (await data.FetchNextPage(100).ConfigureAwait(false)).Streams.SelectMany(x => x.Events).ToArray();
